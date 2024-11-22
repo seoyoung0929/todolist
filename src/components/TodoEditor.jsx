@@ -5,18 +5,16 @@ import React, { useRef, useState } from 'react';
 
 const TodoEditor = ({ addTodo }) => {
   const [task, setTask] = useState('');
-  // inputRef 변수 선언
+
   const inputRef = useRef();
   const onChangeTask = (e) => {
     setTask(e.target.value);
   };
   const onSubmit = () => {
-    // 빈 입력 방지
     if (!task) return;
 
-    // 할 일 추가
     addTodo(task);
-    // 입력창 초기화 및 포커스
+
     setTask('');
     inputRef.current.focus();
   };
@@ -66,8 +64,6 @@ const TodoEditor = ({ addTodo }) => {
         >
           할 일 추가
         </button>
-        {/* input에 텍스트가 입력되지 않으면 버튼 비활성화 */}
-        {/* 하나의 버튼에 true/false로 반전되는 작업이라면 ! 부정연산자를 써주자 (그냥 외워^^..)*/}
       </form>
     </div>
   );
