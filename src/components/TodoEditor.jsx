@@ -21,6 +21,19 @@ const TodoEditor = ({ addTodo }) => {
     inputRef.current.focus();
   };
 
+  const onKeyDown = (e) => {
+    if (e.key === 'Enter') onSubmit();
+    if (e.key === 'Escape') {
+      setTask('');
+      inputRef.current.focus();
+    }
+  };
+
+  const onCloseKey = () => {
+    setTask('');
+    inputRef.current.focus();
+  };
+
   return (
     <div>
       <h2>새로운 Todo 작성하기</h2>
@@ -30,13 +43,18 @@ const TodoEditor = ({ addTodo }) => {
             ref={inputRef}
             type="text"
             value={task}
+            onKeyDown={onKeyDown}
             onChange={onChangeTask}
             name=""
             id=""
             placeholder="할 일을 추가로 입력해주세요."
             className="p-3 w-full"
           />
-          <button className="absolute top-0 right-0 w-10 h-10 flex items-center justify-center text-black">
+          <button
+            disabled={!task}
+            onClick={onCloseKey}
+            className="absolute top-0 right-0 w-10 h-10 flex items-center justify-center text-black"
+          >
             <IoClose />
           </button>
         </div>
