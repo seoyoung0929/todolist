@@ -1,10 +1,16 @@
 'use client';
 import { IoClose } from 'react-icons/io5';
 import classNames from 'classnames';
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
+import { ThemaContext } from '@/app/layout';
+import { useTodo } from '@/contexts/TodoContext';
+import { useTheme } from '@/contexts/ThemeContext';
 
-const TodoEditor = ({ addTodo }) => {
+const TodoEditor = ({}) => {
+  const theme = useTheme();
   const [task, setTask] = useState('');
+
+  const { addTodo } = useTodo();
 
   const inputRef = useRef();
   const onChangeTask = (e) => {
@@ -46,7 +52,7 @@ const TodoEditor = ({ addTodo }) => {
             name=""
             id=""
             placeholder="할 일을 추가로 입력해주세요."
-            className="p-3 w-full"
+            className={classNames('p-3 text-black w-full', theme.input, `text-${theme.white}, bg-${theme.black}`)}
           />
           <button
             disabled={!task}
